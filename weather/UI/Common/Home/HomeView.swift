@@ -46,12 +46,13 @@ struct HomeView: View {
                     
                     VStack(spacing: 0) {
                         SectionHeaderView(systemImage: "calendar", headerText: "5-DAY FORECAST")
-                        
+                        let maxTempF = response.forecast.getMaxTempF()
+                        let minTempF = response.forecast.getMinTempF()
                         ForEach(response.forecast.forecastday, id: \.self) { day in
                             Divider()
                                 .foregroundStyle(Color.darkGray)
                                 .padding(.horizontal)
-                            DayWeatherCard(day: day)
+                            DayWeatherCard(maxTemp: maxTempF, minTemp: minTempF, day: day)
                                 .padding(.horizontal)
                             
                         }

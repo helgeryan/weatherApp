@@ -15,6 +15,32 @@ struct ForecastResponse: Codable {
 
 struct Forecast: Codable {
     let forecastday: [ForecastDay]
+    
+    /// getMaxTemp()
+    ///
+    /// return: Max temperature in Farenheit
+    func getMaxTempF() -> Double {
+        var max: Double = -100
+        for day in forecastday {
+            if max < day.day.maxtemp_f {
+                max = day.day.maxtemp_f
+            }
+        }
+        return max
+    }
+    
+    /// getMinTemp()
+    ///
+    /// return: Min temperature in Farenheit
+    func getMinTempF() -> Double  {
+        var max: Double = 200
+        for day in forecastday {
+            if max > day.day.mintemp_f {
+                max = day.day.mintemp_f
+            }
+        }
+        return max
+    }
 }
 
 struct ForecastDay: Codable, Hashable {
@@ -23,7 +49,7 @@ struct ForecastDay: Codable, Hashable {
     let day: Day
     let hour: [Hour]
     let astro: Astro
-    
+
 }
 
 struct Day: Codable, Hashable {

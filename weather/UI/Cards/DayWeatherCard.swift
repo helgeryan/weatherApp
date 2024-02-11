@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DayWeatherCard: View {
+    var maxTemp: Double
+    var minTemp: Double
     let day: ForecastDay
     var body: some View {
         HStack {
@@ -23,9 +25,28 @@ struct DayWeatherCard: View {
             Text(day.day.mintemp_f.getTempString())
                 .modifier(RegularText())
             
-            RoundedRectangle(cornerRadius: 2)
-                .frame(height: 4)
-                .foregroundStyle(Color.darkGray)
+            
+            GeometryReader { proxy in
+                let spread: Double = maxTemp - minTemp
+                let rightPadding = (maxTemp - day.day.maxtemp_f) * (proxy.size.width / spread)
+                let leftPadding = (day.day.mintemp_f - minTemp) * (proxy.size.width / spread)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 2)
+                        .frame(height: 4)
+                        .foregroundStyle(Color.darkGray)
+                    
+                    RoundedRectangle(cornerRadius: 2)
+                        .frame(height: 4)
+                        .foregroundStyle(LinearGradient(colors: [.blue, .yellow, .red], startPoint: .init(x: 0, y: 0), endPoint: .init(x: 1, y: 0)))
+                        .mask({
+                            RoundedRectangle(cornerRadius: 2)
+                                .frame(height: 4)
+                                .padding(.leading, leftPadding)
+                                .padding(.trailing, rightPadding)
+                        })
+                }
+            }
+            .fixedSize(horizontal: false, vertical: true)
             
             Text(day.day.maxtemp_f.getTempString())
                  .modifier(RegularText())
@@ -44,7 +65,7 @@ struct DayWeatherCard: View {
 }
 
 #Preview {
-    DayWeatherCard(day: .init(
+    DayWeatherCard(maxTemp: 18.0, minTemp: 10.0, day: .init(
         date_epoch: 0, day: .init(
             maxtemp_c: 10.0,
             maxtemp_f: 13.0,
@@ -79,5 +100,6 @@ struct DayWeatherCard: View {
             moon_illumination: 0,
             is_moon_up: 0,
             is_sun_up: 0)))
+    .background(Color.weatherLightBlue)
             
 }
