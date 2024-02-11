@@ -15,7 +15,7 @@ struct HourWeatherCard: View {
                 .modifier(BoldText(fontSize: 11))
                 .padding(.top)
             
-            WeatherAsyncImage(imageUrl: URL(string: "https:\(hour.condition.icon)") , width: 40, height: 40)
+            WeatherAsyncImage(imageUrl: hour.condition.iconUrl, width: 40, height: 40)
                 .padding(.horizontal)
                 .shadow(radius: 10.0)
             

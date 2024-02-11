@@ -16,20 +16,21 @@ struct WeatherTextField: View {
                 .modifier(RegularText())
                 .padding(.horizontal)
                 .fixedSize()
+                .onSubmit {
+                    submitSearch()
+                }
             
             Divider()
-                .foregroundStyle(Color.darkGray)
+                .foregroundStyle(Color.weatherDarkGray)
             
             Button {
-                Task {
-                    await weatherManager.refresh(with: searchText)
-                }
+                submitSearch()
             } label: {
                 Image(systemName: "magnifyingglass")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 15, height: 15)
-                    .foregroundStyle(Color.darkGray)
+                    .foregroundStyle(Color.weatherDarkGray)
                     .padding(8)
             }
         }
@@ -37,5 +38,11 @@ struct WeatherTextField: View {
         .clipped()
         .clipShape(Capsule())
         .fixedSize(horizontal: true, vertical: true)
+    }
+    
+    func submitSearch() {
+        Task {
+            await weatherManager.refresh(with: searchText)
+        }
     }
 }

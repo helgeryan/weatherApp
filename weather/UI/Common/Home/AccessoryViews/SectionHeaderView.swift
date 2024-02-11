@@ -15,11 +15,12 @@ struct SectionHeaderView: View {
             Image(systemName: systemImage)
                 .resizable()
                 .scaledToFit()
-                .foregroundStyle(Color.darkGray)
+                .foregroundStyle(Color.white)
                 .frame(width: 20, height: 20)
-                .padding()
+                .padding([.vertical, .leading])
+                .padding(.trailing, 6)
             Text(headerText)
-                .modifier(RegularText(fontSize: 11, textColor: Color.darkGray))
+                .modifier(SemiboldText(fontSize: 11, textColor: Color.white))
             Spacer()
         }
     }

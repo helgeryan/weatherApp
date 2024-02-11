@@ -25,8 +25,7 @@ class WeatherManager: ObservableObject {
         debugPrint("Starting refresh")
         isLoading = true
         currentWeather = handleApiResult(result: await service.getWeather(query: query))
-        forecastedWeather = handleApiResult(result: await service.getForecast(query: query, days: 5))
-        debugPrint(currentWeather)
+        forecastedWeather = handleApiResult(result: await service.getForecast(query: query, days: Constants.forecastDays))
         isLoading = false
         debugPrint("Finished refresh")
     }
@@ -53,7 +52,7 @@ class WeatherManager: ObservableObject {
             })
             
             do {
-                return try! decoder.decode(T.self, from: data)
+                return try decoder.decode(T.self, from: data)
             } catch(let error) {
                 debugPrint("Error: \(error)")
                 return nil

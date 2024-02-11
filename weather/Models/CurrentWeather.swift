@@ -54,4 +54,8 @@ struct Condition: Codable, Hashable {
     let text: String
     let icon: String
     let code: Int
+    
+    var iconUrl: URL? {
+        return URL(string: "https:\(icon)")
+    }
 }

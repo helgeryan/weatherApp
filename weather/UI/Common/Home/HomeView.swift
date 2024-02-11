@@ -10,73 +10,67 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var weatherManager: WeatherManager
     @State var searchText: String = "Chanhassen"
+    @State var sizeOpacityScale: CGFloat = 1
+    @State var maxSize: CGFloat? = nil
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             WeatherTextField(searchText: $searchText)
+                .padding(.top, 5)
             
-            ScrollView {
-                if let response = weatherManager.forecastedWeather {
-                    Text("Weather in \(response.location.name)")
-                        .modifier(BoldText())
-                    
-                    Text(getAttributedString(forecast: response))
-                        .modifier(BoldText(fontSize: 30))
-                    
-                    WeatherAsyncImage()
-                    
-                    if let firstDay = response.forecast.forecastday.first {
-                        
-                        VStack(spacing: 0) {
-                            SectionHeaderView(systemImage: "clock", headerText: "HOURLY FORECAST")
-                            Divider()
-                                .padding(.horizontal)
-                            ScrollView(.horizontal) {
-                                HStack(spacing: 0) {
-                                    ForEach(firstDay.hour, id: \.self) { hour in
-                                        HourWeatherCard(hour: hour)
+            if let forecastedWeather = weatherManager.forecastedWeather {
+                Text("Weather in \(forecastedWeather.location.name)")
+                    .modifier(BoldText())
+                    .padding([.top, .horizontal])
+                    .padding(.bottom, 8)
+                
+                Text(forecastedWeather.current.temp_f.getTempAttributedString(isFarenheit: true))
+                    .modifier(BoldText(fontSize: 30))
+                
+                let size = sizeOpacityScale > 0 ? (sizeOpacityScale < 1 ? sizeOpacityScale * 64 : 64) : 0
+                WeatherAsyncImage(imageUrl: forecastedWeather.current.condition.iconUrl, width: size, height: size)
+                    .shadow(radius: 10)
+                    .opacity(sizeOpacityScale)
+                
+                
+                if let firstDay = forecastedWeather.forecast.forecastday.first {
+                    Text("Min: \(firstDay.day.mintemp_f.getTempString()) /  Max: \(firstDay.day.maxtemp_f.getTempString())")
+                        .modifier(SemiboldText(fontSize: 11))
+                        .opacity(sizeOpacityScale)
+                }
+                ScrollView {
+                    if let firstDay = forecastedWeather.forecast.forecastday.first {
+                        ZStack {
+                            GeometryReader { g -> AnyView in 
+                                let rect = g.frame(in: .global)
+                                DispatchQueue.main.async {
+                                    guard let maxSize = self.maxSize else {
+                                        self.maxSize = rect.maxY
+                                        return
                                     }
+                                    self.sizeOpacityScale = (g.size.height - (maxSize - rect.maxY)) / g.size.height
+                                    
                                 }
+                                return AnyView(
+                                    RoundedRectangle(cornerRadius: 0).foregroundStyle(Color.clear)
+                                )
                             }
+                            HomeHourlyForecastView(firstDay: firstDay)
+                                .background(Color.weatherLightBlue.opacity(0.2))
+                                .clipShape(RoundedRectangle(cornerRadius: 8.0))
+                                .clipped()
+                                .padding()
                         }
+                    }
+                    HomeDailyForecastView(forecast: forecastedWeather.forecast)
                         .background(Color.weatherLightBlue.opacity(0.2))
                         .clipShape(RoundedRectangle(cornerRadius: 8.0))
                         .clipped()
                         .padding()
-                    }
-                    
-                    VStack(spacing: 0) {
-                        SectionHeaderView(systemImage: "calendar", headerText: "5-DAY FORECAST")
-                        let maxTempF = response.forecast.getMaxTempF()
-                        let minTempF = response.forecast.getMinTempF()
-                        ForEach(response.forecast.forecastday, id: \.self) { day in
-                            Divider()
-                                .foregroundStyle(Color.darkGray)
-                                .padding(.horizontal)
-                            DayWeatherCard(maxTemp: maxTempF, minTemp: minTempF, day: day)
-                                .padding(.horizontal)
-                            
-                        }
-                    }
-                    .background(Color.weatherLightBlue.opacity(0.2))
-                    .clipShape(RoundedRectangle(cornerRadius: 8.0))
-                    .clipped()
-                    .padding()
                 }
-                
+                .padding(.top, 6)
             }
         }
         .background(Color.weatherBlue)
-    }
-    
-    func getAttributedString(forecast: ForecastResponse) -> AttributedString {
-        let valueString = String(format: "%d\(Constants.degrees)", Int(forecast.current.temp_f))
-        var string: AttributedString = AttributedString(valueString)
-        string.font = .systemFont(ofSize: 30, weight: .bold)
-        
-        var string2: AttributedString = AttributedString("F")
-        string2.font = .systemFont(ofSize: 22, weight: .bold)
-        
-        return string + string2
     }
 }
 
