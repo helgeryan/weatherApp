@@ -50,8 +50,8 @@ struct CurrentWeather: Codable {
     let gust_kph: Double
 }
 
-struct Condition: Codable {
+struct Condition: Codable, Hashable {
     let text: String
-    let icon: URL
+    let icon: String
     let code: Int
 }

@@ -17,7 +17,7 @@ struct Forecast: Codable {
     let forecastday: [ForecastDay]
 }
 
-struct ForecastDay: Codable {
+struct ForecastDay: Codable, Hashable {
 //    let date: Date
     let date_epoch: Int
     let day: Day
@@ -26,7 +26,7 @@ struct ForecastDay: Codable {
     
 }
 
-struct Day: Codable {
+struct Day: Codable, Hashable {
     let maxtemp_c: Double
     let maxtemp_f: Double
     let mintemp_c: Double
@@ -49,7 +49,7 @@ struct Day: Codable {
     let uv: Double
 }
 
-struct Astro: Codable {
+struct Astro: Codable, Hashable {
     let sunrise: String
     let sunset: String
     let moonrise: String
@@ -61,7 +61,7 @@ struct Astro: Codable {
     
 }
 
-struct Hour: Codable {
+struct Hour: Codable, Hashable {
 //    let time: Date
     let time_epoch: Int
     let temp_c: Double
