@@ -16,7 +16,7 @@ struct weatherApp: App {
                 .environmentObject(weatherManager)
                 .onAppear {
                     Task {
-                        await weatherManager.refresh(with: "London")
+                        await weatherManager.refresh(with: "Chanhassen")
                     }
                 }
         }

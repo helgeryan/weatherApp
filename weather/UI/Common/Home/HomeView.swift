@@ -9,22 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var weatherManager: WeatherManager
-    @State var searchText: String = ""
+    @State var searchText: String = "Chanhassen"
     var body: some View {
         VStack {
-            HStack {
-                TextField("Enter a location", text: $searchText)
-                    .fixedSize()
-                
-                
-                Button {
-                    Task {
-                        await weatherManager.refresh(with: searchText)
-                    }
-                } label: {
-                    Text("Enter")
-                }
-            }
+            WeatherTextField(searchText: $searchText)
             
             ScrollView {
                 if let response = weatherManager.forecastedWeather {
@@ -36,24 +24,34 @@ struct HomeView: View {
                     
                     WeatherAsyncImage()
                     
+                    if let firstDay = response.forecast.forecastday.first {
+                        
+                        VStack(spacing: 0) {
+                            SectionHeaderView(systemImage: "clock", headerText: "HOURLY FORECAST")
+                            Divider()
+                                .padding(.horizontal)
+                            ScrollView(.horizontal) {
+                                HStack(spacing: 0) {
+                                    ForEach(firstDay.hour, id: \.self) { hour in
+                                        HourWeatherCard(hour: hour)
+                                    }
+                                }
+                            }
+                        }
+                        .background(Color.weatherLightBlue.opacity(0.2))
+                        .clipShape(RoundedRectangle(cornerRadius: 8.0))
+                        .clipped()
+                        .padding()
+                    }
                     
                     VStack(spacing: 0) {
-                        HStack(spacing: 0) {
-                            Image(systemName: "calendar")
-                                .resizable()
-                                .scaledToFit()
-                                .foregroundStyle(Color.darkGray)
-                                .frame(width: 20, height: 20)
-                                .padding()
-                            Text("5-DAY FORECAST")
-                                .modifier(RegularText(fontSize: 11, textColor: Color.darkGray))
-                            Spacer()
-                        }
+                        SectionHeaderView(systemImage: "calendar", headerText: "5-DAY FORECAST")
                         
                         ForEach(response.forecast.forecastday, id: \.self) { day in
                             Divider()
+                                .foregroundStyle(Color.darkGray)
                                 .padding(.horizontal)
-                            DayWeatherCard(day: day.day)
+                            DayWeatherCard(day: day)
                                 .padding(.horizontal)
                             
                         }

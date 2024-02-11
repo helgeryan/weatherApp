@@ -26,6 +26,7 @@ class WeatherManager: ObservableObject {
         isLoading = true
         currentWeather = handleApiResult(result: await service.getWeather(query: query))
         forecastedWeather = handleApiResult(result: await service.getForecast(query: query, days: 5))
+        debugPrint(currentWeather)
         isLoading = false
         debugPrint("Finished refresh")
     }
