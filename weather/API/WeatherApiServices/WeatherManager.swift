@@ -1,5 +1,5 @@
 //
-//  GameManager.swift
+//  WeatherManager.swift
 //  WeatherMarketplace
 //
 //  Created by Ryan Helgeson on 1/31/24.
@@ -8,7 +8,8 @@
 import Foundation
 
 protocol WeatherManagerDataSource {
-    
+    func getCurrentWeather(query: String) async -> CurrentWeatherResponse?
+    func getForecast(query: String) async -> ForecastResponse?
 }
 
 enum WeatherError: LocalizedError {
@@ -45,10 +46,18 @@ class WeatherManager: ObservableObject, WeatherManagerDataSource {
         debugPrint("Starting refresh")
         isLoading = true
         error = nil
-        currentWeather = handleApiResult(result: await service.getWeather(query: query))
-        forecastedWeather = handleApiResult(result: await service.getForecast(query: query, days: Constants.forecastDays))
+        currentWeather = await getCurrentWeather(query: query)
+        forecastedWeather = await getForecast(query: query)
         isLoading = false
         debugPrint("Finished refresh")
+    }
+    
+    func getCurrentWeather(query: String) async -> CurrentWeatherResponse? {
+       return handleApiResult(result: await service.getWeather(query: query))
+    }
+    
+    func getForecast(query: String) async -> ForecastResponse? {
+       return handleApiResult(result: await service.getForecast(query: query, days: Constants.forecastDays))
     }
     
     func handleApiResult<T: Decodable>(result: Result<Data, Error>) -> T? {

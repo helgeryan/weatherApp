@@ -1,5 +1,5 @@
 //
-//  GameApiAction.swift
+//  WeatherApiAction.swift
 //  WeatherMarketplace
 //
 //  Created by Ryan Helgeson on 1/31/24.
@@ -7,20 +7,14 @@
 
 import Foundation
 
-public enum GameApiAction {
-    case getGames
-    case getCarousel
+public enum WeatherApiAction {
     case getCurrentWeather(query: String)
     case getForecast(query: String, days: Int)
 }
 
-extension GameApiAction: WeatherRouter {
+extension WeatherApiAction: WeatherRouter {
     var method: HTTPMethod {
         switch self {
-        case .getGames:
-            return .get
-        case .getCarousel:
-            return .get
         case .getCurrentWeather:
             return .get
         case .getForecast:
@@ -30,10 +24,6 @@ extension GameApiAction: WeatherRouter {
 
     var path: String {
         switch self {
-        case .getGames :
-            return "api/v2/us/music/most-played/\(10)/albums.json"
-        case .getCarousel:
-            return "api/v2/us/music/most-played/\(10)/albums.json"
         case .getCurrentWeather:
             return "current.json"
         case .getForecast:
@@ -47,10 +37,6 @@ extension GameApiAction: WeatherRouter {
     
     var parameters: [URLQueryItem]? {
         switch self {
-        case .getGames:
-            return []
-        case .getCarousel:
-            return []
         case .getCurrentWeather(let query):
             return [
                 .init(name: "key", value: "45152e194ce645bf945205207240802"),

@@ -1,5 +1,5 @@
 //
-//  MockGameService.swift
+//  MockWeatherService.swift
 //  WeatherMarketplace
 //
 //  Created by Ryan Helgeson on 1/31/24.
@@ -26,6 +26,7 @@ class MockWeatherService: WeatherService {
             text: "Snowy",
             icon: "",
             code: 1009),
+        is_day: 0,
         wind_mph: 0.0,
         wind_kph: 0.0,
         wind_degree: 0,

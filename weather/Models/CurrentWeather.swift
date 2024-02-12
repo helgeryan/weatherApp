@@ -2,26 +2,10 @@
 //  CurrentWeather.swift
 //  weather
 //
-//  Created by Ryan Helgeson on 2/8/24.
+//  Created by Ryan Helgeson on 2/12/24.
 //
 
 import Foundation
-
-struct CurrentWeatherResponse: Codable {
-    let location: Location
-    let current: CurrentWeather
-}
-
-struct Location: Codable {
-    let name: String
-    let region: String
-    let country: String
-    let lat: Double
-    let lon: Double
-    let tz_id: String
-    let localtime_epoch: Int
-    let localtime: Date
-}
 
 struct CurrentWeather: Codable {
     let last_updated_epoch: Int
@@ -29,7 +13,7 @@ struct CurrentWeather: Codable {
     let temp_c: Double
     let temp_f: Double
     let condition: Condition
-//    let is_day: Bool
+    let is_day: Int
     let wind_mph: Double
     let wind_kph: Double
     let wind_degree: Int
@@ -48,14 +32,4 @@ struct CurrentWeather: Codable {
     let uv: Double
     let gust_mph: Double
     let gust_kph: Double
-}
-
-struct Condition: Codable, Hashable {
-    let text: String
-    let icon: String
-    let code: Int
-    
-    var iconUrl: URL? {
-        return URL(string: "https:\(icon)")
-    }
 }

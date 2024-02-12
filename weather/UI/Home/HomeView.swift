@@ -27,7 +27,6 @@ struct HomeView: View {
                 LoadingView()
             } else {
                 if let forecastedWeather = weatherManager.forecastedWeather {
-                    let _ = debugPrint(forecastedWeather.location)
                     Text("Weather in \(forecastedWeather.location.name)")
                         .accessibilityIdentifier("titleText")
                         .modifier(BoldText())
