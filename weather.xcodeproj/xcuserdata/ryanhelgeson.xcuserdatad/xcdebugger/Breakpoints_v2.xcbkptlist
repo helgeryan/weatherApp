@@ -110,8 +110,8 @@
             filePath = "weather/API/WeatherApiServices/MockWeatherService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "getWeather(query:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "weather/API/WeatherApiServices/MockWeatherService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "getForecast(query:days:)"
             landmarkType = "7">
          </BreakpointContent>

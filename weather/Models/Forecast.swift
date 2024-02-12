@@ -125,6 +125,10 @@ struct Hour: Codable, Hashable {
     let uv: Double
     let short_rad: Double
     let diff_rad: Double
+    
+    var chanceOfPrecipitation: Int {
+        return chance_of_rain > chance_of_snow ? chance_of_rain : chance_of_snow
+    }
 }
 //
 //"vis_km": 10.0,

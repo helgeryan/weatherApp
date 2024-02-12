@@ -57,6 +57,6 @@ struct DayWeatherCard: View {
 }
 
 #Preview {
-    DayWeatherCard(maxTemp: 18.0, minTemp: 10.0, day: Constants.demoDay)
+    DayWeatherCard(maxTemp: 18.0, minTemp: 10.0, day: MockWeatherService.demoDay)
         .background(Color.weatherLightBlue)
 }

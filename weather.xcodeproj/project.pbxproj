@@ -44,6 +44,7 @@
 		E6BB69902B7A942B00BA1491 /* Int+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB698F2B7A942B00BA1491 /* Int+extensions.swift */; };
 		E6BB69922B7AC7F800BA1491 /* JSONDecoder+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB69912B7AC7F800BA1491 /* JSONDecoder+extensions.swift */; };
 		E6BB69942B7AC86400BA1491 /* JSONEncoder+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB69932B7AC86400BA1491 /* JSONEncoder+extensions.swift */; };
+		E6BB69962B7ACCCA00BA1491 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB69952B7ACCCA00BA1491 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		E6BB698F2B7A942B00BA1491 /* Int+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extensions.swift"; sourceTree = "<group>"; };
 		E6BB69912B7AC7F800BA1491 /* JSONDecoder+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+extensions.swift"; sourceTree = "<group>"; };
 		E6BB69932B7AC86400BA1491 /* JSONEncoder+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONEncoder+extensions.swift"; sourceTree = "<group>"; };
+		E6BB69952B7ACCCA00BA1491 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,9 +328,10 @@
 		E6BB696F2B7972ED00BA1491 /* AccessoryViews */ = {
 			isa = PBXGroup;
 			children = (
-				E6BB69702B797CF600BA1491 /* HomeHourlyForecastView.swift */,
-				E6BB69692B78529500BA1491 /* SectionHeaderView.swift */,
 				E6BB69722B797D0E00BA1491 /* HomeDailyView.swift */,
+				E6BB69702B797CF600BA1491 /* HomeHourlyForecastView.swift */,
+				E6BB69952B7ACCCA00BA1491 /* LoadingView.swift */,
+				E6BB69692B78529500BA1491 /* SectionHeaderView.swift */,
 			);
 			path = AccessoryViews;
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				E6BB69672B784DD600BA1491 /* HourWeatherCard.swift in Sources */,
 				E6BB69942B7AC86400BA1491 /* JSONEncoder+extensions.swift in Sources */,
 				E6BB695A2B7840CC00BA1491 /* CGFloat+extensions.swift in Sources */,
+				E6BB69962B7ACCCA00BA1491 /* LoadingView.swift in Sources */,
 				E62EBA7B2B754B2E00BEB858 /* WeatherApiError.swift in Sources */,
 				E6BB695D2B78410B00BA1491 /* DayWeatherCard.swift in Sources */,
 				E6BB69652B7846F400BA1491 /* Double+extensions.swift in Sources */,
