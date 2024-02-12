@@ -24,7 +24,7 @@ class MockWeatherService: WeatherService {
         temp_f: 32.0,
         condition: .init(
             text: "Snowy",
-            icon: "",
+            icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
             code: 1009),
         is_day: 0,
         wind_mph: 0.0,
@@ -52,7 +52,7 @@ class MockWeatherService: WeatherService {
         is_day: 1,
         condition: .init(
             text: "Snowy",
-            icon: "",
+            icon: "//cdn.weatherapi.com/weather/64x64/night/122.png",
             code: 1009),
         wind_mph: 0.0,
         wind_kph: 0.0,
