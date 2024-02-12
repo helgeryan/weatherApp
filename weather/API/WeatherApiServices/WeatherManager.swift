@@ -54,23 +54,8 @@ class WeatherManager: ObservableObject, WeatherManagerDataSource {
     func handleApiResult<T: Decodable>(result: Result<Data, Error>) -> T? {
         switch result {
         case .success(let data):
-            let formatter = DateFormatter()
-            formatter.calendar = Calendar(identifier: .iso8601)
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            
             let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
-                let container = try decoder.singleValueContainer()
-                let dateStr = try container.decode(String.self)
-                
-                formatter.dateFormat = "yyyy-MM-dd hh:mm"
-                if let date = formatter.date(from: dateStr) {
-                    return date
-                }
-                
-                throw WeatherAPIErrors.custom("Misformed Date")
-            })
+            decoder.configureWeatherDateDecodingStrategy()
             
             do {
                 return try decoder.decode(T.self, from: data)

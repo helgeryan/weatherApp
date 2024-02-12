@@ -11,7 +11,7 @@ struct HourWeatherCard: View {
     let hour: Hour
     var body: some View {
         VStack(spacing: 0) {
-            Text(getTimeText(epochTime: hour.time_epoch))
+            Text(hour.time_epoch.getEpochToHourText())
                 .modifier(BoldText(fontSize: 11))
                 .padding(.top)
             
@@ -25,17 +25,7 @@ struct HourWeatherCard: View {
         }
     }
     
-    func getTimeText(epochTime: Int) -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(epochTime))
-        
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        formatter.dateFormat = "ha"
-        formatter.amSymbol = "AM"
-        formatter.pmSymbol = "PM"
-        
-        return formatter.string(from: date)
-    }
+
 }
 
 #Preview {

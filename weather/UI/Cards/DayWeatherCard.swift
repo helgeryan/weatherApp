@@ -13,7 +13,7 @@ struct DayWeatherCard: View {
     let day: ForecastDay
     var body: some View {
         HStack {
-            Text(getTimeText(epochTime: day.date_epoch))
+            Text(day.date_epoch.getEpochToWeekdayText())
                 .modifier(RegularText())
             
             WeatherAsyncImage(imageUrl: day.day.condition.iconUrl, width: 42, height: 42)
@@ -53,15 +53,7 @@ struct DayWeatherCard: View {
         }
     }
     
-    func getTimeText(epochTime: Int) -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(epochTime))
-        
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        formatter.dateFormat = "eee"
-        
-        return formatter.string(from: date)
-    }
+
 }
 
 #Preview {
