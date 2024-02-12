@@ -40,6 +40,7 @@
 		E6BB69712B797CF600BA1491 /* HomeHourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB69702B797CF600BA1491 /* HomeHourlyForecastView.swift */; };
 		E6BB69732B797D0E00BA1491 /* HomeDailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB69722B797D0E00BA1491 /* HomeDailyView.swift */; };
 		E6BB69752B79808F00BA1491 /* SemiboldText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB69742B79808F00BA1491 /* SemiboldText.swift */; };
+		E6BB698D2B7A8D9A00BA1491 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6BB698C2B7A8D9A00BA1491 /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		E6BB69702B797CF600BA1491 /* HomeHourlyForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHourlyForecastView.swift; sourceTree = "<group>"; };
 		E6BB69722B797D0E00BA1491 /* HomeDailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDailyView.swift; sourceTree = "<group>"; };
 		E6BB69742B79808F00BA1491 /* SemiboldText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemiboldText.swift; sourceTree = "<group>"; };
+		E6BB698C2B7A8D9A00BA1491 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 		E62EBA872B7594AE00BEB858 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				E6BB696E2B7972E400BA1491 /* Home */,
 				E6BB695B2B7840F700BA1491 /* Cards */,
 				E6BB69532B783CB000BA1491 /* Common */,
 			);
@@ -241,7 +244,7 @@
 		E6BB69532B783CB000BA1491 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				E6BB696E2B7972E400BA1491 /* Home */,
+				E6BB698E2B7A8DA500BA1491 /* Error */,
 				E6BB696B2B79727800BA1491 /* TextField */,
 				E6BB69682B78527900BA1491 /* AsyncImage */,
 				E6BB69542B783CB700BA1491 /* Text */,
@@ -319,6 +322,14 @@
 				E6BB69722B797D0E00BA1491 /* HomeDailyView.swift */,
 			);
 			path = AccessoryViews;
+			sourceTree = "<group>";
+		};
+		E6BB698E2B7A8DA500BA1491 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				E6BB698C2B7A8D9A00BA1491 /* ErrorView.swift */,
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,6 +467,7 @@
 				E62EBA892B7594B700BEB858 /* HomeView.swift in Sources */,
 				E6BB69732B797D0E00BA1491 /* HomeDailyView.swift in Sources */,
 				E6BB69632B78442500BA1491 /* WeatherAsyncImage.swift in Sources */,
+				E6BB698D2B7A8D9A00BA1491 /* ErrorView.swift in Sources */,
 				E62EBA822B754B2E00BEB858 /* MockWeatherService.swift in Sources */,
 				E6BB69712B797CF600BA1491 /* HomeHourlyForecastView.swift in Sources */,
 				E6BB696D2B79728E00BA1491 /* WeatherTextField.swift in Sources */,

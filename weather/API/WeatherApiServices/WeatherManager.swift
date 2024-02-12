@@ -8,14 +8,34 @@
 import Foundation
 
 protocol WeatherManagerDataSource {
+    
+}
+
+enum WeatherError: LocalizedError {
+    case apiRequestFailed
+    case decoderFailed
+    
+    var errorDescription: String? {
+        switch self {
+        case .apiRequestFailed:
+            return "Api request failed"
+        case .decoderFailed:
+            return  "Decoder failed"
+        }
+    }
+    
+    var userMessage: String {
+        return  "Unable to find weather data for this location at this time. Please try again."
+    }
 }
 
 @MainActor
-class WeatherManager: ObservableObject {
+class WeatherManager: ObservableObject, WeatherManagerDataSource {
     let service: WeatherService
     @Published var isLoading: Bool = false
     @Published var currentWeather: CurrentWeatherResponse?
     @Published var forecastedWeather: ForecastResponse?
+    @Published var error: WeatherError?
     
     init(service: WeatherService) {
         self.service = service
@@ -24,6 +44,7 @@ class WeatherManager: ObservableObject {
     func refresh(with query: String) async {
         debugPrint("Starting refresh")
         isLoading = true
+        error = nil
         currentWeather = handleApiResult(result: await service.getWeather(query: query))
         forecastedWeather = handleApiResult(result: await service.getForecast(query: query, days: Constants.forecastDays))
         isLoading = false
@@ -55,11 +76,14 @@ class WeatherManager: ObservableObject {
                 return try decoder.decode(T.self, from: data)
             } catch(let error) {
                 debugPrint("Error: \(error)")
+                self.error = WeatherError.decoderFailed
                 return nil
             }
         case .failure(let error):
             debugPrint("Error: \(error)")
+            self.error = WeatherError.apiRequestFailed
             return nil
         }
     }
 }
+
