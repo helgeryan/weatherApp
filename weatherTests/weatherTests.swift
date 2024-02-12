@@ -115,7 +115,6 @@ final class weatherTests: XCTestCase {
         XCTAssertNil( manager.currentWeather)
         XCTAssertNil( manager.forecastedWeather)
         XCTAssertNotNil( manager.error)
-        
     }
     
     @MainActor
@@ -127,7 +126,40 @@ final class weatherTests: XCTestCase {
         XCTAssertNotNil( manager.currentWeather)
         XCTAssertNotNil( manager.forecastedWeather)
         XCTAssertNil( manager.error)
+    }
+    
+    @MainActor
+    func testHandleApiResultFail() throws {
+        let manager = WeatherManager(service: MockWeatherService(forceError: true))
+        
+        let locationNil: Location? = manager.handleApiResult(result: .failure(WeatherError.apiRequestFailed))
+        XCTAssertNil(locationNil)
+        XCTAssertNotNil(manager.error)
+    }
+    
+    @MainActor
+    func testHandleApiResultSuccess() throws {
+        let manager = WeatherManager(service: MockWeatherService(forceError: true))
+        
+        let encoder = JSONEncoder()
+        encoder.configureWeatherDateEncodingStrategy()
+        let encodedData = try! encoder.encode(MockWeatherService.mockLocation)
         
         
+        let locationNotNil: Location? = manager.handleApiResult(result: .success(encodedData))
+        XCTAssertNotNil(locationNotNil)
+        XCTAssertNil(manager.error)
+    }
+    
+    func testGetMaxTempF() throws {
+        let forecast = MockWeatherService.mockForecastResponse.forecast
+        
+        XCTAssertEqual(13.0, forecast.getMaxTempF())
+    }
+    
+    func testGetMinTempF() throws {
+        let forecast = MockWeatherService.mockForecastResponse.forecast
+        
+        XCTAssertEqual(11.0, forecast.getMinTempF())
     }
 }

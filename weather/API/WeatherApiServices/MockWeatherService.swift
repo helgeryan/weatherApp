@@ -46,8 +46,8 @@ class MockWeatherService: WeatherService {
     
     let forceError: Bool
     
-    let mockCurrentWeatherResponse: CurrentWeatherResponse = .init(location: mockLocation, current: mockCurrentWeather)
-    let mockForecastResponse: ForecastResponse = .init(
+    static let mockCurrentWeatherResponse: CurrentWeatherResponse = .init(location: mockLocation, current: mockCurrentWeather)
+    static let mockForecastResponse: ForecastResponse = .init(
         location: mockLocation,
         current: mockCurrentWeather,
         forecast: .init(forecastday: [
@@ -63,7 +63,7 @@ class MockWeatherService: WeatherService {
         if forceError {
             return .failure(WeatherAPIErrors.custom("Mock forced error"))
         } else {
-            return .success(encodeData(mockCurrentWeatherResponse))
+            return .success(encodeData(MockWeatherService.mockCurrentWeatherResponse))
         }
     }
     
@@ -71,7 +71,7 @@ class MockWeatherService: WeatherService {
         if forceError {
             return .failure(WeatherAPIErrors.custom("Mock forced error"))
         } else {
-            return .success(encodeData(mockForecastResponse))
+            return .success(encodeData(MockWeatherService.mockForecastResponse))
         }
     }
     
