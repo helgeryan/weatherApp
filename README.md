@@ -10,6 +10,14 @@ Due to machine requirements for other projects the app was built on the 15.3 Bet
 
 Minimum deployment target for the project is set to 17.0
 
+## Steps to Run
+1. Download/clone all project files. Provided in zip file (or from GitHub upon request).
+2. Open up `weather.xcodeproj`
+3. Hook up a iPhone desired iPhone device to computer.
+   NOTE: Project is set to run on a device of iOS 17.0 or newer, make sure deivce is the correct version. (If a 17.0 device is unavailable change minimum deployment by opening weather.xcodeproj > General > Minimum Deployments.)
+4. Select the iPhone as the target run device
+5. Build/Run
+
 ## Project Structure
 
 This section will lay out the general structure of the apps project navigator
@@ -41,5 +49,8 @@ All user interface files used across the app.
 - Common: UI elements that are common throughout all facets of the app.
 - Home: UI elements that are contained within the Home scene
 
+## Testing
 
+Unit tests were created to test various functions throughout the app. To test the WeatherManager in isolation from the network layer, the `MockWeatherService` was injected to use mock data to where errors could be forced and expected data can be decoded and verified.
 
+Automated UI tests were designed to test the apps minimal UI experience. Happy path flow tests the ability to search for a new location and get the weather for that location. Unhappy path flow tests searching gibberish and expecting an error to be returned to the user.
