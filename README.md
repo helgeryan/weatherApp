@@ -54,3 +54,12 @@ All user interface files used across the app.
 Unit tests were created to test various functions throughout the app. To test the WeatherManager in isolation from the network layer, the `MockWeatherService` was injected to use mock data to where errors could be forced and expected data can be decoded and verified.
 
 Automated UI tests were designed to test the apps minimal UI experience. Happy path flow tests the ability to search for a new location and get the weather for that location. Unhappy path flow tests searching gibberish and expecting an error to be returned to the user.
+
+## Future Updates
+
+Due to time constraints certain features will be considered future improvements:
+
+- Codable models will have updated key names in camel casing and use CodingKeys to map the API response json objects.
+- Request to use the actual device location by injected the CoreLocation framework. If the user accepts use the location from CoreLocation as the default value instead of "Chanhassen" when the app launches.
+- Create a common navigation/presentation style to the app for further details on the hourly and daily forecast reports.
+- Add in more detail tiles to show wind, air quality, pressure, visibilty, etc.
